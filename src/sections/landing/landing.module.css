@@ -1,0 +1,27 @@
+.landing {
+  background: #ffffff;
+}
+
+.boxStyle {
+  /* color: #ffffff;
+  border: 1px solid #ffffff; */
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 300px;
+}
+
+.hamburger {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.size {
+  width: 400px;
+  height: 300px;
+  text-align: center;
+  line-height: 300px;
+}

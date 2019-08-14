@@ -1,0 +1,24 @@
+.stickyBox {
+  --x: 0px;
+  --y: 0px;
+  padding: 0px !important;
+  margin: 0px !important;
+}
+
+.moveBox {
+  position: absolute;
+  transform: translate(var(--x), var(--y));
+  transition: transform 0.1s;
+}
+
+.positionBox {
+  position: absolute;
+  transform: translate(var(--x), var(--y));
+  transition: all 0.1s cubic-bezier(0.42, 0, 0.41, 1.67);
+}
+
+.resetBox {
+  position: absolute;
+  transform: translate(0px, 0px);
+  transition: all 0.2s cubic-bezier(0.42, 0, 0.41, 1.67);
+}

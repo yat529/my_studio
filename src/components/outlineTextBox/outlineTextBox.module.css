@@ -1,0 +1,17 @@
+.outlineText {
+  display: inline-block;
+  padding-right: 15px;
+  font-size: 48px;
+  text-align: left;
+  color: #ffffff;
+  -webkit-text-stroke: 1px #000000;
+  transition: all 0.8s ease-out;
+}
+
+.outlineText:last-child {
+  padding-right: 0px;
+}
+
+.outlineText:hover {
+  color: #000000;
+}
