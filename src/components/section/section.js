@@ -1,8 +1,19 @@
-import React from 'react'
+import React, {Component} from 'react'
 import Styles from './section.module.css'
 
-export default function Section(props) {
-  let classNames = Styles.section + (props.className ? ` ${props.className}` : '')
+export default class Section extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      classNames: Styles.section + (props.className ? ` ${props.className}` : '')
+    }
+  }
 
-  return <section className={classNames}>{props.children}</section>
+  render() {
+    return (
+      <section className={this.state.classNames}>
+        {this.props.children}
+      </section>
+    )
+  }
 }

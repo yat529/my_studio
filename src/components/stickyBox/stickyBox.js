@@ -5,6 +5,10 @@ export default class StickyBox extends Component {
   constructor(props) {
     super(props)
 
+    let customClasses = props.rotate? Styles.rotateBox : ''
+
+    customClasses = props.className ? customClasses + ' ' + props.className : customClasses
+
     this.state = {
       x: 0,
       y: 0,
@@ -15,13 +19,14 @@ export default class StickyBox extends Component {
       thresholdX: 0,
       thresholdY: 0,
       styleClasses: Styles.stickyBox,
-      customClasses: props.className
+      customClasses
     }
   }
 
   handleEntry(evt) {
     let {clientX, clientY} = evt,
-        {x, y} = this.state
+        {x, y} = this.state,
+        {onEnter} = this.props
 
     let dx = clientX - x,
         dy = clientY - y
@@ -44,6 +49,11 @@ export default class StickyBox extends Component {
       styleClasses: Styles.stickyBox + ' ' + Styles.positionBox,
       freeze: true
     })
+
+    // run cb
+    if (onEnter && typeof onEnter === 'function') {
+      onEnter(evt.currentTarget)
+    }
   }
 
   handleOver(evt) {
@@ -74,9 +84,10 @@ export default class StickyBox extends Component {
     })
   }
 
-  resetBox() {
+  resetBox(evt) {
     clearInterval(this.debouceTimer)
-    let {dx, dy} = this.state
+    let {dx, dy} = this.state,
+        {onReset} = this.props
 
     this.elem.style.setProperty('--x', dx+'px')
     this.elem.style.setProperty('--y', dy+'px')
@@ -95,6 +106,11 @@ export default class StickyBox extends Component {
         styleClasses: Styles.stickyBox
       })
     }, 300)
+
+    // run cb
+    if (evt && onReset && typeof onReset === 'function') {
+      onReset(evt.currentTarget)
+    }
   }
 
   setRef(elem) {
@@ -129,13 +145,16 @@ export default class StickyBox extends Component {
   }
 
   render() {
-    let {styleClasses, customClasses} = this.state
+    let {styleClasses, customClasses} = this.state,
+        rotate = this.props
+
+    
 
     return ( 
       <div className={styleClasses}
         ref={elem => this.setRef(elem)}
         onMouseEnter={e => this.handleEntry(e)}
-        onMouseLeave={e => this.resetBox()}
+        onMouseLeave={e => this.resetBox(e)}
         onMouseMove={e => this.handleOver(e)}
       >
         <div className={customClasses}>
